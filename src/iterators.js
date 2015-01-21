@@ -5,7 +5,14 @@ var Iterators = {
   // - tripler([7,50,4]) should return [21,150,12].
   // Use `map` to accomplish this.
   tripler: function (numbers) {
+     function myTripplers(n) { return n * 3; }
+     return numbers.map(myTripplers);
   },
+
+//     return numbers.map(function (n) {
+//        return n * 3;
+
+
 
   // perfectSquares() should take an array of numbers as a parameter
   // and return an array that contains only the numbers from the
@@ -16,6 +23,10 @@ var Iterators = {
   // - perfectSquares([1,4,9]) should return [1,4,9].
   // Use `filter` to accomplish this.
   perfectSquares: function (numbers) {
+     return numbers.filter(function (n) {
+        var squareRoot = Math.sqrt(n);
+        return squareRoot == Math.round(squareRoot);
+     });
   },
 
   // product() should accept an array of numbers as a parameter
@@ -26,6 +37,9 @@ var Iterators = {
   // - product([100,200,300]) should return 6000000.
   // Use `reduce` to accomplish this.
   product: function (numbers) {
+    function myProduct(a, b) {
+        return a * b; }
+        return numbers.reduce(myProduct);
   },
 
   // hasInstructor() accepts an array of names and should return true
@@ -38,8 +52,15 @@ var Iterators = {
   // - hasInstructor(["Bob", "Tim", "Jen"]) should return true.
   // Use `some` to accomplish this.
   // Hint: see `toLowerCase`, it could be useful.
+  
+
   hasInstructor: function (names) {
+    return names.some(function (oneName) {
+      oneName = oneName.toLowerCase();
+        return oneName == "tim" || oneName == "alex" || oneName == "elie";
+    });
   },
+
 
   // allSamePlayer() should accept an array of players, represented by
   // X's and O's. The players array may also contain empty spots, which
@@ -52,7 +73,17 @@ var Iterators = {
   // - allSamePlayer(["X","_","X"]) should return false,
   // - allSamePlayer(["_","_","_"]) should return false.
   // Use `every` to accomplish this.
+
+  // copied this from solution, need to really absorb this
+
   allSamePlayer: function (players) {
+    var first = players[0];
+    if (first !== "X" && first !== "O") {
+      return false;
+    }
+    return players.every(function (character) {
+      return character === first;
+    });
   },
 
   // Also not an iterator metheod, necessarily. devowel() takes a
@@ -68,7 +99,19 @@ var Iterators = {
   // - devowel("Howdy") should return "Hwdy",
   // - devowel("Phone's ringing, dude.") should return "Phn's rngng, dd.".
   devowel: function (text) {
+
+    // copied this from solution, need to really absorb this
+
+    // Solution using a Regular Expression.
+    // return text.replace(/[aeiou]/g, "");
+
+    // Solution using .split(), .join(), and .filter().
+    var vowels = ["a", "e", "i", "o", "u"];
+    return text.split("").filter(function (character) {
+      return vowels.indexOf(character) === -1;
+    }).join("");
   }
+
 };
 
 module.exports = Iterators;
